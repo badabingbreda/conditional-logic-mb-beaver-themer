@@ -19,4 +19,5 @@ To prevent accidental rendering in case a rule gets deleted, it will always hide
 Version history
 |version|date|changes|
 |---|---|---|
+|1.0.1|feb 28th 2022|Fixed a constant that was used from other plugin file
 |1.0.0|feb 28th 2022|First commit, initial release
