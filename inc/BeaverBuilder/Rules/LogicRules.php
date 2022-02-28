@@ -31,9 +31,13 @@ final class LogicRules {
 
         if ( !class_exists( 'MeprRule' ) ) return false;
 
+        // prevent 
         $mepr_rule = ! empty( $rule->compare ) ? new \MeprRule( $rule->compare ) : false;
 
-        $value = ! empty( $mepr_rule->ID ) && ! current_user_can( 'mepr-active', "rule:{$rule->compare}" ) ? false : true;
+        $value = !( is_bool($mepr_rule) ? $mepr_rule : $mepr_rule->ID ) ||      // if rule has been deleted, make sure to return false in order to protect content
+                 ! current_user_can( 'mepr-active', "rule:{$rule->compare}" ) 
+                    ? false 
+                    : true;
 
 		return self::evaluate_rule( $rule , $value );
 	}
